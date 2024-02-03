@@ -6,19 +6,27 @@ public class Spawn : MonoBehaviour
 {
     [SerializeField]  GameObject enemyPrefab;
     [SerializeField] GameObject container;
-    [SerializeField] float spawnRate;
+    GameManager gM;
     private float limiteI, limiteD;
+    float timer = 0;
 
     void Start()
     {
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-
+        gM = GameObject.Find("GameManager").GetComponent<GameManager>();
         limiteD = renderer.bounds.size.x;
         limiteI = renderer.bounds.size.y;
-        InvokeRepeating("SpawnEnemy", 1f, spawnRate);
+        //InvokeRepeating("SpawnEnemy", 0f, gM.spawnRate);
     }
     void Update()
     {
+        timer += Time.deltaTime;
+
+        if(timer >= gM.currentSpawnRate)
+        {
+            StartCoroutine("SpawnEnemy");
+            timer = 0;
+        }
         
     }
 
