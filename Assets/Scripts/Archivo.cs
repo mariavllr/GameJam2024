@@ -15,22 +15,65 @@ public class Archivo : MonoBehaviour {
     private Vector3 offset;
     [SerializeField] CursorManager cursorManager;
     [SerializeField] float minCursorSpeed;
+    [SerializeField] DescargasManager descargasManager;
     public GameObject spawnFather;
+    public int spawnIndex;
+    private Vector2 originPosition;
+    float startTime;
 
     bool returning = false;
+    bool throwing = false;
     [SerializeField] float returnSpeed = 1.0f;
 
+    Rigidbody2D rb;
+    Camera mainCamera;
+
+    public Archivo(string nombre, float peso) 
+    {
+        nombreArchivo = nombre;
+        pesoArchivo = peso;
+    }
     private void Awake()
     {
         cursorManager = GameObject.Find("CursorManager").GetComponent<CursorManager>();
+        descargasManager = GameObject.Find("VentanaDescargas").GetComponent<DescargasManager>();
+        rb = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
+        originPosition = transform.position;
+
 
     }
 
     void Update()
     {
+
         if (returning)
         {
-           
+            float journeyLength = Vector3.Distance(originPosition, spawnFather.transform.position);
+
+            // Calculate the distance covered over time
+            float distCovered = (Time.time - startTime) * returnSpeed;
+
+            // Calculate the fraction of the journey completed
+            float fracJourney = distCovered / journeyLength;
+
+            // Move the object towards the target position
+            transform.position = Vector2.Lerp(originPosition, spawnFather.transform.position, fracJourney);
+
+            // Check if the object has reached the target position
+            if (fracJourney >= 1.0f)
+            {
+                returning = false;
+            }
+
+        }
+
+        if (IsOutOfScreen())
+        {
+            Destroy(gameObject);
+            descargasManager.EliminarArchivo(spawnIndex);
+            print("Archivo eliminado");
+            
         }
 
         if (Input.GetMouseButtonDown(0)) // Left mouse button down
@@ -89,11 +132,27 @@ public class Archivo : MonoBehaviour {
         }
     }
 
+    bool IsOutOfScreen()
+    {
+        // Obtener la posición del objeto en coordenadas de la pantalla
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position);
+
+        // Verificar si la posición está fuera de la pantalla
+        if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void ThrowOrReturn()
     {
         if(cursorManager.velocityCursorMagnitude < minCursorSpeed)
         {
-            StartCoroutine("ReturnToSpawn");
+            
+            startTime = Time.time;
+            returning = true;
 
             
           
@@ -101,29 +160,11 @@ public class Archivo : MonoBehaviour {
 
         else
         {
-            transform.Translate(cursorManager.cursorVelocity.normalized * cursorManager.velocityCursorMagnitude / 10 );
+            rb.AddForce(cursorManager.cursorVelocity / 10);
+           
         }
     }
 
     
-    IEnumerator ReturnToSpawn()
-    {
-        //Vector3 startPosition = transform.position;
-        // Obtener la posición final
-        Vector3 endPosition = spawnFather.transform.position;
-        // Calcular la distancia entre las posiciones inicial y final
-        //float distance = Vector3.Distance(startPosition, endPosition);
-
-        // Mientras no se haya llegado a la posición final
-        while (transform.position != endPosition)
-        {
-            // Calcular la nueva posición
-            float step = returnSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, endPosition, step);
-
-            // Esperar hasta el siguiente frame
-            yield return null;
-        }
-
-    }
+    
 }
