@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ventana : MonoBehaviour
@@ -11,10 +12,41 @@ public class Ventana : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) // Left mouse button down
         {
-            print("Mouse clicked");
+            //print("Mouse clicked");
+
+
+            
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
+            
+
+            if (hit.collider != null && hit.collider.gameObject == gameObject && hit.collider.gameObject.layer == 6)
             {
+
+
+                if (hit.collider.gameObject.CompareTag("Descargas"))
+                {
+                    print("Descargas");
+                    for (int child = 0; child < transform.childCount; child++)
+                    {
+                        transform.GetChild(child).GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Archivos";
+                        print("Sprite modificado.");
+                    }
+
+
+                    GameObject ventanaArchivos = GameObject.Find("Archivos");
+
+                    if(ventanaArchivos.transform.childCount > 0)
+                    {
+                        for (int child = 0; child < ventanaArchivos.transform.childCount; child++)
+                        {
+                            ventanaArchivos.transform.GetChild(child).GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Archivos";
+                            print("Sprite modificado.");
+                        }
+                    }
+                    
+
+
+                }
                 isDragging = true;
                 offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 gameObject.GetComponentInParent<VentanaManager>().CambioDeUltimaVentana(gameObject.GetComponent<Ventana>());

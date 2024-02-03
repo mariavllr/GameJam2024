@@ -14,6 +14,7 @@ public class AddArchivo : MonoBehaviour
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
                 gameObject.GetComponentInParent<DescargasManager>().AddArchivo();
+                print("Add archivo");
             }
         }
     }

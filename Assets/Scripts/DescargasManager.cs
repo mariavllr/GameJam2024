@@ -13,9 +13,17 @@ public class DescargasManager : MonoBehaviour
 
     [SerializeField] GameObject archivoPrefab;
 
+    [SerializeField] GameObject padreArchivos;
+
     public void AddArchivo()
     {
-        archivosActuales[archivosIndice] = Instantiate(archivoPrefab, spawnArray[archivosIndice].transform.position, Quaternion.identity);
-        archivosIndice++;
+        if(archivosIndice < archivosActuales.Length)
+        {
+            GameObject nuevoArchivo = Instantiate(archivoPrefab, spawnArray[archivosIndice].transform.position, Quaternion.identity, padreArchivos.transform);
+            nuevoArchivo.GetComponent<Archivo>().spawnFather = spawnArray[archivosIndice];
+            archivosActuales[archivosIndice] = nuevoArchivo;
+            archivosIndice++;
+        }
+      
     }
 }
