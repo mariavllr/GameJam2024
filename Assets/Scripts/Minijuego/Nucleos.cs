@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Nucleos : MonoBehaviour
 {
+    [SerializeField] Sprite spriteActivo;
+    [SerializeField] Sprite spriteInactivo;
     private void OnEnable()
     {
         Enemy.onDamage += QuitarNucleo;
     }
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -21,9 +23,15 @@ public class Nucleos : MonoBehaviour
 
     void QuitarNucleo()
     {
-        if(transform.childCount != 0)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            Destroy(transform.GetChild(0).gameObject);
+            GameObject nucleo = transform.GetChild(i).gameObject;
+
+            if (nucleo.GetComponent<Image>().sprite == spriteActivo)
+            {
+                nucleo.GetComponent<Image>().sprite = spriteInactivo; 
+                break;
+            }
         }
     }
 }

@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     private bool canTakeDamage;
     private float numero;
 
+    [SerializeField] int monedasPorEnemigo;
+    
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -55,6 +57,8 @@ public class Enemy : MonoBehaviour
             numero = dmg;
             StartCoroutine("MostrarNumero");
             StartCoroutine("TakeDamageCoroutine");
+            gameManager.monedas += monedasPorEnemigo;
+            gameManager.textMonedas.text = gameManager.monedas.ToString();
         }
     }
 
