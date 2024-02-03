@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] public int ram;
     [SerializeField] public int nucleos;
+    [SerializeField] public int monedas;
+    [SerializeField] public TextMeshProUGUI textMonedas;
+
 
     [Header("Enemigos")]
     public float starterVelocity;
