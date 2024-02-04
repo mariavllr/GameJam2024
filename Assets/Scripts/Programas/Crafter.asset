@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Crafter
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  nombre: Tienda
+  nombre: Crafter
   ventana: {fileID: 0}

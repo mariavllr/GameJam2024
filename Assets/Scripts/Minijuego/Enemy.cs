@@ -70,6 +70,8 @@ public class Enemy : MonoBehaviour
         vida -= numero;
         if (vida <= 0)
         {
+            gameManager.monedas += monedasPorEnemigo;
+            gameManager.textMonedas.text = gameManager.monedas.ToString();
             Die();
         }
 
@@ -86,9 +88,7 @@ public class Enemy : MonoBehaviour
     }
 
     void Die()
-    {
-        gameManager.monedas += monedasPorEnemigo;
-        gameManager.textMonedas.text = gameManager.monedas.ToString();
+    {       
         Destroy(this.gameObject);
     }
 }

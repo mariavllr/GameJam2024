@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Explorador
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  nombre: Tienda
+  nombre: Explorador
   ventana: {fileID: 0}

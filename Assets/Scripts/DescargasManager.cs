@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DescargasManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] spawnArray;
+    [SerializeField] public GameObject[] spawnArray;
 
     private Cell[] celdas;
 
@@ -30,7 +30,7 @@ public class DescargasManager : MonoBehaviour
         }
         
     }
-    public void AddArchivo()
+    public void AddArchivo(int peso, string nombre)
     {
         if(archivosIndice < celdas.Length)
         {

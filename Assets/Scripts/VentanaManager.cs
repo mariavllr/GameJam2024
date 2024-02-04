@@ -21,14 +21,17 @@ public class VentanaManager : MonoBehaviour
 
                     ventanaDescargas.transform.GetChild(child).GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
                     print("Sprite modificado.");
+
+                    
                 }
 
                 GameObject ventanaArchivos = GameObject.Find("Archivos"); 
 
                 for (int child = 0; child < ventanaArchivos.transform.childCount; child++)
                 {
-
+                    
                     ventanaArchivos.transform.GetChild(child).GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
+                    //ventanaArchivos.transform.GetChild(child).GetComponent<Archivo>().spawnFather = ventanaDescargas.GetComponent<DescargasManager>().spawnArray[child].gameObject;
                     print("Sprite modificado.");
                 }
 
