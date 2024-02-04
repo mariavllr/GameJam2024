@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("Programas")]
+    public BarraHerramientas barraHerramientas;
     public List<Programa> programasComprados;
 
     enum Estados
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
         tiempoTotal += Time.deltaTime;
         minutos = Mathf.FloorToInt(tiempoTotal / 60f);
         segundos = Mathf.FloorToInt(tiempoTotal % 60f);
+        textMonedas.text = monedas.ToString();
         GestionarEstados();
     }
 

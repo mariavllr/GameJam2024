@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Torrent
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  nombre: Tienda
+  nombre: Torrent
   ventana: {fileID: 0}
+  precio: 0
