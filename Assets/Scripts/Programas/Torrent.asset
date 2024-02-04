@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a84613cac563db40a7e957b62d7cc24, type: 3}
   m_Name: Torrent
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9125c204f566db048a92ebcb64d9d14a, type: 3}
   nombre: Torrent
-  ventana: {fileID: 0}
-  precio: 0
+  ventana: {fileID: 8677263546568589506, guid: 60198c055d35b8647ba59f707e01faec, type: 3}
+  precio: 50

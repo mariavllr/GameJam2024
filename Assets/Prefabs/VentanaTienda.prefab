@@ -79,6 +79,8 @@ MonoBehaviour:
   celdaTienda: {fileID: 4100108782144002841, guid: 6c52326d42da67f419fc328474e70103, type: 3}
   programas:
   - {fileID: 11400000, guid: 8806b50101ba82c4699266504576d36f, type: 2}
+  - {fileID: 11400000, guid: cb90480655c4cf245a64d30ef46c3ed1, type: 2}
+  - {fileID: 11400000, guid: 51452d274bc90fc48967d574eb420a9f, type: 2}
 --- !u!1 &1823774654000971500
 GameObject:
   m_ObjectHideFlags: 0
