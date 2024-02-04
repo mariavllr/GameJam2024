@@ -22,7 +22,7 @@ public class Spawn : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= gM.currentSpawnRate)
+        if(timer >= gM.currentSpawnRate && gM.canSpawn)
         {
             StartCoroutine("SpawnEnemy");
             timer = 0;

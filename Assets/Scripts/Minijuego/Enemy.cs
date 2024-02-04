@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         canTakeDamage = true;
+        vida = gameManager.vidaEnemigosActual;
     }
 
     // Update is called once per frame
@@ -60,8 +61,7 @@ public class Enemy : MonoBehaviour
             numero = dmg;
             StartCoroutine("MostrarNumero");
             StartCoroutine("TakeDamageCoroutine");
-            gameManager.monedas += monedasPorEnemigo;
-            gameManager.textMonedas.text = gameManager.monedas.ToString();
+
         }
     }
 
@@ -87,6 +87,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        gameManager.monedas += monedasPorEnemigo;
+        gameManager.textMonedas.text = gameManager.monedas.ToString();
         Destroy(this.gameObject);
     }
 }
