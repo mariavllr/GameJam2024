@@ -8,4 +8,5 @@ public class Programa : ScriptableObject
     public Sprite icon;
     public string nombre;
     public GameObject ventana;
+    public int precio;
 }

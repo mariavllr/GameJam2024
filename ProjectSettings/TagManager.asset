@@ -7,6 +7,7 @@ TagManager:
   - Limite
   - Descargas
   - Enemigo
+  - Tienda
   layers:
   - Default
   - TransparentFX

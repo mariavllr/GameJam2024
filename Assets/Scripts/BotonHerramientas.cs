@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BotonHerramientas : MonoBehaviour
 {
-    [SerializeField] GameObject ventanaObjetivo;
+    [SerializeField] public GameObject ventanaObjetivo;
 
     public void BotonSeleccionado()
     {

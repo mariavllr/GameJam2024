@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         TakeDamage(gameManager.cursorDamage); 
     }
 
-    //Le hago daño al enemigo
+    //Le hago daÃ±o al enemigo
     public void TakeDamage(float dmg)
     {
         if (canTakeDamage)
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
     }
 
     void Die()
-    {       
+    {
         Destroy(this.gameObject);
     }
 }
