@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2513971848796521676}
   m_Layer: 0
   m_Name: Enemigo
-  m_TagString: Untagged
+  m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,6 @@ MonoBehaviour:
   tiempoNumeroVisible: 0.2
   cooldown: 0.3
   monedasPorEnemigo: 10
-  textMonedas: {fileID: 0}
 --- !u!61 &2513971848796521676
 BoxCollider2D:
   m_ObjectHideFlags: 0
