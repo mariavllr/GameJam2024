@@ -35,12 +35,15 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //El enemigo me hace daño a mi
-        if (onDamage != null)
+        if (collision.gameObject.CompareTag("Limite"))
         {
-            onDamage();
+            if (onDamage != null)
+            {
+                onDamage();
+            }
+            Die();
         }
-        Die();
+      
     }
 
     void OnMouseOver()
@@ -49,7 +52,7 @@ public class Enemy : MonoBehaviour
     }
 
     //Le hago daño al enemigo
-    void TakeDamage(float dmg)
+    public void TakeDamage(float dmg)
     {
         if (canTakeDamage)
         {

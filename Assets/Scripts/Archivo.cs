@@ -23,16 +23,38 @@ public class Archivo : MonoBehaviour {
 
     bool returning = false;
     bool throwing = false;
+    bool exploding = false;
     [SerializeField] float returnSpeed = 1.0f;
 
     Rigidbody2D rb;
     Camera mainCamera;
+
+    [SerializeField] GameObject explosionModel;
+    [SerializeField] float explosionExpansionSpeed;
+    [SerializeField] float explosionDuration;
+    
+    
 
     public Archivo(string nombre, float peso) 
     {
         nombreArchivo = nombre;
         pesoArchivo = peso;
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemigo") && throwing)
+        {
+            exploding = true;
+            explosionModel.SetActive(true);
+            GetComponent<SpriteRenderer>().enabled = false;
+            rb.velocity = Vector3.zero;
+        }
+      
+    }
+
+    
     private void Awake()
     {
         cursorManager = GameObject.Find("CursorManager").GetComponent<CursorManager>();
@@ -44,8 +66,42 @@ public class Archivo : MonoBehaviour {
 
     }
 
+    IEnumerator StopExploding()
+    {
+
+        yield return new WaitForSeconds(explosionDuration);
+        descargasManager.EliminarArchivo(spawnIndex);
+        Destroy(gameObject);
+
+    }
     void Update()
     {
+        if (exploding)
+        {
+            float maxExplosionRange = pesoArchivo / 10;
+
+            if(explosionModel.transform.localScale.x > maxExplosionRange)
+            {
+                exploding = false;
+
+                StartCoroutine("StopExploding");
+                
+               
+            }
+            else
+            {
+                Vector3 nuevaEscala = explosionModel.transform.localScale;
+
+                nuevaEscala.x += pesoArchivo / 1000;
+                nuevaEscala.y += pesoArchivo / 1000;
+                nuevaEscala.z += pesoArchivo / 1000;
+
+                explosionModel.transform.localScale = nuevaEscala;
+
+                //Physics2D.OverlapCircle()
+            }
+
+        }
 
         if (returning)
         {
@@ -161,7 +217,7 @@ public class Archivo : MonoBehaviour {
         else
         {
             rb.AddForce(cursorManager.cursorVelocity / 10);
-           
+            throwing = true;
         }
     }
 
