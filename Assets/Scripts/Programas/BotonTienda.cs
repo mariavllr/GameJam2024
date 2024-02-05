@@ -8,6 +8,7 @@ public class BotonTienda : MonoBehaviour
     Tienda tienda;
     GameManager gameManager;
     Button boton;
+    [SerializeField] AudioSource audioComprar;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -31,6 +32,7 @@ public class BotonTienda : MonoBehaviour
                 gameManager.barraHerramientas.NuevoPrograma(programa);
                 boton.interactable = false;
                 boton.gameObject.transform.GetChild(2).GetComponent<Button>().interactable = false;
+                audioComprar.Play();
             }
         }
     }

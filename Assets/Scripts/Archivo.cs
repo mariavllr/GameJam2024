@@ -30,7 +30,7 @@ public class Archivo : MonoBehaviour {
     [SerializeField] float returnSpeed = 1.0f;
 
     Rigidbody2D rb;
-    Camera mainCamera;
+    public Camera mainCamera;
 
     [SerializeField] GameObject explosionModel;
     [SerializeField] float explosionExpansionSpeed;
@@ -61,8 +61,14 @@ public class Archivo : MonoBehaviour {
     private void Awake()
     {
         cursorManager = GameObject.Find("CursorManager").GetComponent<CursorManager>();
-        descargasManager = GameObject.Find("VentanaDescargas").GetComponent<DescargasManager>();
-        firewallManager = GameObject.Find("VentanaFirewall").GetComponent<FirewallManager>();
+        
+        try
+        {
+            descargasManager = GameObject.Find("VentanaDescargas").GetComponent<DescargasManager>();
+            firewallManager = GameObject.Find("VentanaFirewall").GetComponent<FirewallManager>();
+        }
+        catch { };
+    
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
         originPosition = transform.position;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+
 using UnityEngine.UI;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine.XR;

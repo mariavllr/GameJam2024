@@ -18,7 +18,11 @@ public class Enemy : MonoBehaviour
     private float numero;
 
     [SerializeField] int monedasPorEnemigo;
-    
+
+    [SerializeField] AudioSource danoEnemigo;
+    [SerializeField] AudioSource golpeOrdenador;
+    [SerializeField] AudioSource muerteEnemigo;
+
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -42,6 +46,7 @@ public class Enemy : MonoBehaviour
             {
                 onDamage();
             }
+            gameManager.enemigoMeHaceDano.Play();
             Die();
         }
       
@@ -58,6 +63,7 @@ public class Enemy : MonoBehaviour
         if (canTakeDamage)
         {
             canTakeDamage = false;
+            danoEnemigo.Play();
             numero = dmg;
             StartCoroutine("MostrarNumero");
             StartCoroutine("TakeDamageCoroutine");
@@ -89,6 +95,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        gameManager.muerteEnemigo.Play();
         Destroy(this.gameObject);
     }
 }

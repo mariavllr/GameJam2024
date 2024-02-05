@@ -24,6 +24,7 @@ public class BarraHerramientas : MonoBehaviour
     {
         GameObject btn = Instantiate(botonBarraHerramientas, transform);
         GameObject ventana = Instantiate(programa.ventana, ventanaManager.transform);
+        gameManager.ventanasAbiertas.Add(ventana);
         btn.GetComponent<Image>().sprite = programa.icon;
         btn.GetComponent<BotonHerramientas>().ventanaObjetivo = ventana;
     }
