@@ -23,8 +23,12 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         text.color = Color.white;
     }
 
-    public void OnClick()
+    public void ChangeScene(string name)
     {
-        SceneManager.LoadScene("Minijuego");
+        SceneManager.LoadScene(name);
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

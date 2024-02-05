@@ -6,12 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 245c5554f59517a47b21eed90530ba39
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 2fbc47c649caaad4597f01bb22862a0d
+  - enabled: 1
+    path: Assets/Scenes/Ventanas 1.unity
+    guid: 6a05a62ae8a7ae24f8bbe21145148460
+  - enabled: 0
+    path: Assets/Scenes/Ventanas.unity
+    guid: 4d0b713b2a3aa5c48b19712b6235c970
+  - enabled: 1
+    path: Assets/Scenes/Crash.unity
+    guid: 6d4c509071cb6b34d9e3d3c1a2ecd4e6
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
     path: Assets/Scenes/Minijuego.unity
     guid: eb3c037ac63c93c41a6b70418e1dee9d
   m_configObjects: {}

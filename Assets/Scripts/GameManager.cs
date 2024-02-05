@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] public int nucleos;
     [SerializeField] public int monedas;
     [SerializeField] public TextMeshProUGUI textMonedas;
+
+    [Header("Ventanas")]
+    public int maxVentanasAbiertas;
+    public List<GameObject> ventanasAbiertas;
+    public Image fadePanel;
+    public float fadeSpeed;
+    bool muerto;
 
 
     [Header("Enemigos")]
@@ -37,11 +46,18 @@ public class GameManager : MonoBehaviour
     public BarraHerramientas barraHerramientas;
     public List<Programa> programasComprados;
 
+    [Header("Sonido")]
+    public AudioSource audioClic;
+    public AudioSource audioSoltarClic;
+    public AudioSource muerteEnemigo;
+    public AudioSource enemigoMeHaceDano;
+
     enum Estados
     {
         Oleada,
         Descanso
     }
+
     private void OnEnable()
     {
         Administrador.onRAMValueChanged += CambiarVelocidad;
@@ -50,21 +66,44 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        muerto = false;
         currentVelocity = starterVelocity;
         currentSpawnRate = spawnRate;
         segundos = 0;
         canSpawn = true;
         vidaEnemigosActual = vidaEnemigosInicial;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        maxVentanasAbiertas = ram;
         tiempoTotal += Time.deltaTime;
         minutos = Mathf.FloorToInt(tiempoTotal / 60f);
         segundos = Mathf.FloorToInt(tiempoTotal % 60f);
         textMonedas.text = monedas.ToString();
+
         GestionarEstados();
+        GestionarRAM();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            audioClic.Play();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            audioSoltarClic.Play();
+        }
+    }
+
+    void GestionarRAM()
+    {
+        if(ventanasAbiertas.Count > maxVentanasAbiertas)
+        {
+            ventanasAbiertas[0].SetActive(false);
+            ventanasAbiertas.RemoveAt(0);
+        }
     }
 
     void GestionarEstados()
@@ -117,16 +156,16 @@ public class GameManager : MonoBehaviour
                 currentSpawnRate = spawnRate;
                 break;
             case 2:
-                currentVelocity = starterVelocity * 2f;
-                currentSpawnRate = spawnRate * 0.5f;
+                currentVelocity = starterVelocity * 1.5f;
+                currentSpawnRate = spawnRate * 0.8f;
                 break;
             case 3:
-                currentVelocity = starterVelocity * 2.5f;
-                currentSpawnRate = spawnRate* 0.15f;
+                currentVelocity = starterVelocity * 2f;
+                currentSpawnRate = spawnRate* 0.5f;
                 break;
             case 4:
-                currentVelocity = starterVelocity * 3.5f;
-                currentSpawnRate = spawnRate * 0.05f;
+                currentVelocity = starterVelocity * 2.5f;
+                currentSpawnRate = spawnRate * 0.3f;
                 break;
             default:
                 break;
@@ -139,10 +178,38 @@ public class GameManager : MonoBehaviour
         {
             nucleos--;
         }
-        else
+        else if(!muerto)
         {
-            Debug.Log("muerto");
+            muerto = true;
+            StartCoroutine("Muerte");
         }
         
+    }
+
+    IEnumerator Muerte()
+    {
+        StartCoroutine("FadeIn");
+        Time.timeScale -= 0.3f;
+        yield return new WaitForSeconds(1f);
+        Time.timeScale -= 0.3f;
+        yield return new WaitForSeconds(1f);
+        Time.timeScale -= 0.3f;
+        yield return new WaitForSeconds(1f);
+        
+
+    }
+
+    IEnumerator FadeIn()
+    {
+        float alpha = 0f;
+
+        while (alpha < 1f)
+        {
+            alpha += Time.deltaTime * fadeSpeed;
+            fadePanel.color = new Color(100f, 0f, 0f, alpha);
+            yield return null;
+        }
+
+        SceneManager.LoadScene("Crash");
     }
 }
