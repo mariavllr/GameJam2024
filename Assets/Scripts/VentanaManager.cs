@@ -8,7 +8,14 @@ public class VentanaManager : MonoBehaviour
 
     public void CambioDeUltimaVentana(Ventana nuevaVentana)
     {
-        if(ultimaVentana != null) { 
+        if(ultimaVentana != null) {
+
+            try
+            {
+                ultimaVentana.gameObject.GetComponentInChildren<Canvas>().sortingOrder = 0;
+            }
+            catch { }
+           
             ultimaVentana.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
             ultimaVentana.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
 
@@ -34,12 +41,9 @@ public class VentanaManager : MonoBehaviour
                     //ventanaArchivos.transform.GetChild(child).GetComponent<Archivo>().spawnFather = ventanaDescargas.GetComponent<DescargasManager>().spawnArray[child].gameObject;
                     print("Sprite modificado.");
                 }
-
-
-
-
-
             }
+
+            
         }
        
         ultimaVentana = nuevaVentana;

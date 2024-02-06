@@ -47,6 +47,11 @@ public class Ventana : MonoBehaviour
 
 
                 }
+
+                else
+                {
+                    hit.collider.GetComponentInChildren<Canvas>().sortingOrder = 100;
+                }
                 isDragging = true;
                 offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 gameObject.GetComponentInParent<VentanaManager>().CambioDeUltimaVentana(gameObject.GetComponent<Ventana>());
